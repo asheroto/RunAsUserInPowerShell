@@ -4,13 +4,13 @@ Want to run a command as a specific user in PowerShell without having to type in
 
 First, save the password of the user as a secure string by typing this in PowerShell:
 
-    Read-Host -AsSecureString | ConvertFrom-Securestring | Out-File C:\cred.txt -Force
+    Read-Host -AsSecureString | ConvertFrom-Securestring | Out-File C:\UserCred.txt -Force
 
 Just type the password on the blank line and press enter.
 
 Once it's saved, you can use these commands to launch the process. Make sure to adjust the username.
 
-    $Password = Get-Content C:\cred.txt | ConvertTo-SecureString
+    $Password = Get-Content C:\UserCred.txt | ConvertTo-SecureString
     $StartProcInfo = New-Object System.Diagnostics.ProcessStartInfo
     $StartProcInfo.UserName = 'User'
     $StartProcInfo.Password = $Password
@@ -29,7 +29,7 @@ Then add a new function - make sure to adjust the username:
 ```
 function RunAsUser {
 	param($Path,$Arguments)
-	$password = Get-Content C:\cred.txt | ConvertTo-SecureString
+	$password = Get-Content C:\UserCred.txt | ConvertTo-SecureString
 	$StartProcInfo = New-Object System.Diagnostics.ProcessStartInfo
 	$StartProcInfo.UserName = 'User'
 	$StartProcInfo.Password = $Password
