@@ -26,17 +26,19 @@ If you need to do this often, add a function in your PowerShell profile by typin
 
 Then add a new function - make sure to adjust the username:
 
-    function RunAsUser {
-		param($Path,$Arguments)
-	    $password = Get-Content C:\cred.txt | ConvertTo-SecureString
-	    $StartProcInfo = New-Object System.Diagnostics.ProcessStartInfo
-		$StartProcInfo.UserName = 'User'
-		$StartProcInfo.Password = $Password
-		$StartProcInfo.UseShellExecute = $false
-		$StartProcInfo.FileName = $Path
-		$StartProcInfo.Arguments = $Arguments
-		[System.Diagnostics.Process]::Start($StartProcInfo)
-	}
+```
+function RunAsUser {
+	param($Path,$Arguments)
+	$password = Get-Content C:\cred.txt | ConvertTo-SecureString
+	$StartProcInfo = New-Object System.Diagnostics.ProcessStartInfo
+	$StartProcInfo.UserName = 'User'
+	$StartProcInfo.Password = $Password
+	$StartProcInfo.UseShellExecute = $false
+	$StartProcInfo.FileName = $Path
+	$StartProcInfo.Arguments = $Arguments
+	[System.Diagnostics.Process]::Start($StartProcInfo)
+}
+```
 
 Save it, then close PowerShell and reopen.
 
@@ -46,4 +48,5 @@ Now you can simply type this in the future:
 Adjust path of the password file or other options as needed.
 
 Result:
+
 ![result](https://i.imgur.com/9cAOlxS.png)
